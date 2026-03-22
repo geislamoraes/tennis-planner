@@ -18,6 +18,7 @@ export default function TennisTrainingPlanner() {
 
   const [selectedDay, setSelectedDay] = useState("Segunda");
   const [input, setInput] = useState("");
+
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingText, setEditingText] = useState("");
 
@@ -219,11 +220,19 @@ export default function TennisTrainingPlanner() {
                   </button>
                 </div>
               ) : (
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
                   <span
                     onClick={() => toggleSession(index)}
                     style={{
-                      textDecoration: session.done ? "line-through" : "none",
+                      textDecoration: session.done
+                        ? "line-through"
+                        : "none",
                       cursor: "pointer",
                     }}
                   >
@@ -231,10 +240,16 @@ export default function TennisTrainingPlanner() {
                   </span>
 
                   <div style={{ display: "flex", gap: 8 }}>
-                    <button onClick={() => startEditing(index, session.text)}>
+                    <button
+                      onClick={() =>
+                        startEditing(index, session.text)
+                      }
+                    >
                       ✏️
                     </button>
-                    <button onClick={() => deleteSession(index)}>
+                    <button
+                      onClick={() => deleteSession(index)}
+                    >
                       🗑️
                     </button>
                   </div>
@@ -245,3 +260,5 @@ export default function TennisTrainingPlanner() {
         </div>
       </div>
     </div>
+  );
+}
