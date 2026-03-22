@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const daysOfWeek = [
   "Segunda",
@@ -11,9 +11,17 @@ const daysOfWeek = [
 ];
 
 export default function TennisTrainingPlanner() {
-  const [planner, setPlanner] = useState({});
+  const [planner, setPlanner] = useState(() => {
+    const saved = localStorage.getItem("planner");
+    return saved ? JSON.parse(saved) : {};
+  });
+
   const [selectedDay, setSelectedDay] = useState("Segunda");
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("planner", JSON.stringify(planner));
+  }, [planner]);
 
   const addSession = () => {
     if (!input) return;
@@ -49,7 +57,7 @@ export default function TennisTrainingPlanner() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
+        fontFamily: "Inter, sans-serif",
       }}
     >
       <div
@@ -171,4 +179,5 @@ export default function TennisTrainingPlanner() {
     </div>
   );
 }
+
 
